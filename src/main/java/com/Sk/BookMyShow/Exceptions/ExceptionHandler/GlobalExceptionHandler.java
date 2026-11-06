@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import com.Sk.BookMyShow.Entity.Response;
 import com.Sk.BookMyShow.Exceptions.DuplicateResourceException;
 import com.Sk.BookMyShow.Exceptions.ResourceNotFoundException;
+import com.Sk.BookMyShow.Exceptions.ShowException;
 
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
@@ -85,6 +86,12 @@ public class GlobalExceptionHandler {
        return build(ex.getMessage(),HttpStatus.FORBIDDEN, request);
     }
     
+    @ExceptionHandler(ShowException.class)
+    public ResponseEntity<Response<String, Object>> handleShowException(
+            ShowException ex, HttpServletRequest request) {
+        log.error("Error occur while doing request at {} due to : {}", request.getRequestURI(), ex.getMessage());
+        return build(ex.getMessage(),HttpStatus.INTERNAL_SERVER_ERROR, request);
+    }
 
     @ExceptionHandler(Exception.class)
     public ResponseEntity<Response<String, Object>> handleAll(
@@ -93,5 +100,7 @@ public class GlobalExceptionHandler {
         return build("Something went wrong ",HttpStatus.INTERNAL_SERVER_ERROR, request);
     }
 
+
+    
 
 }

@@ -15,13 +15,12 @@ import com.Sk.BookMyShow.Services.ScreenService;
 import lombok.RequiredArgsConstructor;
 
 @RestController 
-@RequestMapping ("/theatre")
 @RequiredArgsConstructor 
 public class SeatController {
     
     private final ScreenService screenService;
     
-    @DeleteMapping ("/{theatreId}/owner/screen/{screenId}/seats/deactivate")
+    @DeleteMapping ("/theatre-owner/theatre/{theatreId}/screen/{screenId}/seats/deactivate")
      public ResponseEntity<?> deactivateSeats(@PathVariable String theatreId,
                                            @PathVariable String screenId
      ){
@@ -30,7 +29,7 @@ public class SeatController {
      }
 
     
-     @DeleteMapping ("/{theatreId}/owner/screen/{screenId}/seats")
+     @DeleteMapping ("/theatre-owner/theatre/{theatreId}/screen/{screenId}/seats")
      public ResponseEntity<?> deleteseats(@PathVariable String theatreId,
                                            @PathVariable String screenId
      ){
@@ -38,7 +37,7 @@ public class SeatController {
             return Response.buildSuccessResponse("Seats Deleted Successfully", HttpStatus.OK,null);
      }
 
-      @GetMapping("/screen/{screenId}/seats")
+      @GetMapping("/theatre/screen/{screenId}/seats")
      public ResponseEntity<?> getAllSeats(@PathVariable String screenId){
             
             return Response.buildSuccessResponse("Seats Deleted Successfully", HttpStatus.OK,Map.of("Seats",screenService.getScreenSeats(screenId)));

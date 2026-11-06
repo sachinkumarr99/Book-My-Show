@@ -13,8 +13,6 @@ public class ShowMapper {
     public Show toEntity(CreateShowRequestDTO request) {
 
         return Show.builder()
-                .theatreId(request.getTheatreId())
-                .screenId(request.getScreenId())
                 .showName(request.getShowName())
                 .showDate(request.getShowDate())
                 .startTime(request.getStartTime())
@@ -24,4 +22,17 @@ public class ShowMapper {
                 .createdAt(Instant.now())
                 .build();
     }
+
+    public CreateShowRequestDTO toDTO(Show show) {
+
+    return CreateShowRequestDTO.builder()
+            .showName(show.getShowName())
+            .showDate(show.getShowDate())
+            .startTime(show.getStartTime())
+            .endTime(show.getEndTime())
+            .language(show.getLanguage())
+            .basePrice(show.getBasePrice())
+            .currencyCode(show.getCurrencyCode())
+            .build();
+}
 }

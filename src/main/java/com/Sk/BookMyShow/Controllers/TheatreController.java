@@ -32,7 +32,6 @@ import lombok.RequiredArgsConstructor;
 
 
 @RestController 
-@RequestMapping("/theatre")
 @RequiredArgsConstructor 
 public class TheatreController {
 
@@ -40,7 +39,7 @@ public class TheatreController {
     
     private final TheatreService theatreService;
 
-    @PostMapping("/owner")
+    @PostMapping("/theatre-owner/theatre")
     public ResponseEntity<?> createTheatre(@Valid @RequestBody  TheatreDto theatreDto){
         
         Theatre theatre = theatreService.registerTheatre(theatreDto);
@@ -51,7 +50,7 @@ public class TheatreController {
         
     }
 
-    @PostMapping("/{theatreId}/owner/assets") 
+    @PostMapping("/theatre-owner/theatre/{theatreId}/assets") 
     public ResponseEntity<?> uploadAssets(
         @RequestPart("logo") MultipartFile logo,
         @RequestPart("images") List<MultipartFile> images,
@@ -64,7 +63,7 @@ public class TheatreController {
 
      }
 
-     @GetMapping 
+     @GetMapping("/theatres") 
      public ResponseEntity<?> getTheatres(){
 
         Map<String,Object> data = new HashMap<>();

@@ -22,7 +22,7 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 
 @RestController 
-@RequestMapping ("/theatre")
+// @RequestMapping ("/theatre")
 @RequiredArgsConstructor 
 public class ScreenController {
 
@@ -36,7 +36,7 @@ public class ScreenController {
 
      // create screen
 
-     @PostMapping ("/{theatreId}/owner/screen")
+     @PostMapping ("theatre-owner/theatre/{theatreId}/screen")
      public ResponseEntity<?> createScreen(@PathVariable String theatreId,
                                            @Valid @RequestBody CreateScreenRequestDto screenRequestDto){
 
@@ -47,7 +47,7 @@ public class ScreenController {
 
      //update screen
 
-     @PutMapping ("/{theatreId}/owner/screen/{screenId}")
+     @PutMapping ("theatre-owner/theatre/{theatreId}/screen/{screenId}")
       public ResponseEntity<?> updateScreen(@PathVariable String theatreId,
                                             @PathVariable String screenId,
                                             @Valid @RequestBody CreateScreenRequestDto screenRequestDto){
@@ -58,7 +58,7 @@ public class ScreenController {
      }
 
      // get screen belongs to particular Theatre
-     @GetMapping ("/{theatreId}/screen")
+     @GetMapping ("theatre/{theatreId}/screen")
      public ResponseEntity<?> getScreens(@PathVariable String theatreId){
 
       Map<String,Object> data = new HashMap<>(Map.of("data",screenService.getScreens(theatreId)));
@@ -74,7 +74,7 @@ public class ScreenController {
       return Response.buildSuccessResponse("Screens Fetched Successfully", HttpStatus.OK, data);
      }
 
-     @DeleteMapping("/{theatreId}/owner/screen/{screenId}/deactivate")
+     @DeleteMapping("/theatre-owner/theatre/{theatreId}/screen/{screenId}/deactivate")
      public ResponseEntity<?> dactivateScreen(@PathVariable String theatreId,
                                             @PathVariable String screenId){
 
@@ -83,7 +83,7 @@ public class ScreenController {
 
     }
 
-         @DeleteMapping("/{theatreId}/owner/screen/{screenId}")
+         @DeleteMapping("/theatre-owner/theatre/{theatreId}/screen/{screenId}")
      public ResponseEntity<?> deleteScreen(@PathVariable String theatreId,
                                             @PathVariable String screenId){
 
